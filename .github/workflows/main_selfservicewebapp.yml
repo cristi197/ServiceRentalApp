@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read #This is required for actions/checkout
+      contents: read # This is required for actions/checkout
 
     steps:
       - uses: actions/checkout@v4
@@ -24,6 +24,7 @@ jobs:
           node-version: '22.x'
 
       - name: npm install, build, and test
+        working-directory: TestAppRent
         run: |
           npm install
           npm run build --if-present
@@ -33,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: TestAppRent
 
   deploy:
     runs-on: ubuntu-latest
@@ -51,5 +52,5 @@ jobs:
         with:
           app-name: 'SelfServiceWebApp'
           slot-name: 'Production'
-          package: .
+          package: node-app
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5481EC2B482E410984800BF28052CE0E }}
