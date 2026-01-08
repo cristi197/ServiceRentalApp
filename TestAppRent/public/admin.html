@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Ore de Lucru</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      padding: 50px;
+      max-width: 600px;
+      width: 100%;
+      animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      color: #333;
+      font-size: 32px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #333;
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      background: #f8f9fa;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #f5576c;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(245, 87, 108, 0.1);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #999;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .form-row .form-group {
+      margin-bottom: 0;
+    }
+
+    button {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 10px 25px rgba(245, 87, 108, 0.3);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(245, 87, 108, 0.4);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .success {
+      background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(56, 142, 60, 0.1) 100%);
+      color: #2e7d32;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      display: none;
+      border-left: 4px solid #4CAF50;
+      font-weight: 500;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .info {
+      background: linear-gradient(135deg, rgba(245, 87, 108, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
+      border-left: 4px solid #f5576c;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 30px;
+      color: #555;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .info strong {
+      color: #f5576c;
+    }
+
+    .time-preview {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .time-preview .hour {
+      color: #f5576c;
+      font-size: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 30px;
+      }
+
+      .header h1 {
+        font-size: 24px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .form-row .form-group {
+        margin-bottom: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>⚙️ Administrare</h1>
+    <p>Personalizează orele de lucru ale serviciului</p>
+  </div>
+
+  <div id="successMessage" class="success">
+    ✅ Orele de lucru au fost actualizate cu succes!
+  </div>
+
+  <form id="hoursForm">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="startHour">Ora de Deschidere</label>
+        <input type="number" id="startHour" min="0" max="23" required />
+      </div>
+      <div class="form-group">
+        <label for="endHour">Ora de Închidere</label>
+        <input type="number" id="endHour" min="0" max="23" required />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Descriere (opțional)</label>
+      <textarea id="description" placeholder="Ex: Luni-Vineri, 9:00 - 17:00 | Sâmbătă 10:00 - 14:00"></textarea>
+    </div>
+
+    <div class="time-preview" id="timePreview">
+      Ore de lucru: <span class="hour" id="previewText">09:00 - 17:00</span>
+    </div>
+
+    <button type="submit">💾 Salvează Modificări</button>
+  </form>
+
+  <div class="info">
+    <strong>💡 Sfat:</strong> Orele pe care le setezi aici vor fi disponibile pentru clienți atunci când fac o programare. Orele se actualizează automat pe formularul de rezervare.
+  </div>
+</div>
+
+<script>
+// Load current hours
+async function loadCurrentHours() {
+  const response = await fetch("/hours");
+  const hours = await response.json();
+  document.getElementById("startHour").value = hours.startHour;
+  document.getElementById("endHour").value = hours.endHour;
+  document.getElementById("description").value = hours.description || "";
+  updatePreview();
+}
+
+function updatePreview() {
+  const startHour = Number(document.getElementById("startHour").value) || 0;
+  const endHour = Number(document.getElementById("endHour").value) || 24;
+  const preview = document.getElementById("previewText");
+  preview.textContent = `${String(startHour).padStart(2, '0')}:00 - ${String(endHour).padStart(2, '0')}:00`;
+}
+
+document.getElementById("startHour").addEventListener("change", updatePreview);
+document.getElementById("endHour").addEventListener("change", updatePreview);
+
+// Save hours
+document.getElementById("hoursForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const startHour = Number(document.getElementById("startHour").value);
+  const endHour = Number(document.getElementById("endHour").value);
+
+  if (startHour >= endHour) {
+    alert("❌ Ora de deschidere trebuie să fie mai mică decât ora de închidere!");
+    return;
+  }
+
+  const data = {
+    startHour,
+    endHour,
+    description: document.getElementById("description").value
+  };
+
+  const res = await fetch("/hours", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  const message = document.getElementById("successMessage");
+  message.style.display = "block";
+  
+  setTimeout(() => {
+    message.style.display = "none";
+  }, 4000);
+});
+
+loadCurrentHours();
+</script>
+
+</body>
+</html>
