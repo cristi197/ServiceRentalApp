@@ -22,6 +22,96 @@
       padding: 20px;
     }
 
+    /* Flatpickr Calendar Styling */
+    .flatpickr-calendar {
+      background: white !important;
+      border: 1px solid #ddd !important;
+      border-radius: 8px !important;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15) !important;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    }
+
+    .flatpickr-calendar.open {
+      z-index: 99999 !important;
+    }
+
+    .flatpickr-months {
+      background: #f8f9fa !important;
+    }
+
+    .flatpickr-current-month {
+      color: #667eea !important;
+      font-weight: 600 !important;
+      padding: 12px 0 !important;
+    }
+
+    .flatpickr-current-month .cur-month {
+      color: #667eea !important;
+      font-weight: 700 !important;
+    }
+
+    .flatpickr-current-month input {
+      color: #667eea !important;
+      font-weight: 600 !important;
+    }
+
+    .flatpickr-weekdays {
+      background: white !important;
+      color: #667eea !important;
+    }
+
+    .flatpickr-weekday {
+      color: #667eea !important;
+      font-weight: 600 !important;
+      font-size: 13px !important;
+    }
+
+    .flatpickr-days {
+      padding: 10px 0 !important;
+    }
+
+    .flatpickr-day {
+      color: #333 !important;
+      max-width: 40px !important;
+      height: 40px !important;
+      line-height: 40px !important;
+      border-radius: 6px !important;
+      transition: all 0.2s ease !important;
+    }
+
+    .flatpickr-day:hover:not(.disabled) {
+      background: #e8eef7 !important;
+      color: #667eea !important;
+    }
+
+    .flatpickr-day.selected {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+      color: white !important;
+      border-color: #667eea !important;
+      font-weight: bold !important;
+    }
+
+    .flatpickr-day.today {
+      border: 2px solid #667eea !important;
+      color: #667eea !important;
+      background: white !important;
+      font-weight: bold !important;
+    }
+
+    .flatpickr-day.disabled {
+      color: #ccc !important;
+      background: transparent !important;
+    }
+
+    .flatpickr-day.booked-date:hover {
+      background: #ffeaa7 !important;
+    }
+
+    .flatpickr-day.prevMonthDay,
+    .flatpickr-day.nextMonthDay {
+      color: #d3d3d3 !important;
+    }
+
     .container {
       background: white;
       border-radius: 20px;
