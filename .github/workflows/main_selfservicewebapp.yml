@@ -35,7 +35,6 @@ jobs:
         with:
           name: node-app
           path: TestAppRent
-
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -46,11 +45,16 @@ jobs:
         with:
           name: node-app
 
+      - name: Prepare package for Azure
+        run: |
+          mkdir package
+          cp -R node-app/TestAppRent/* package/   # copiem conținutul exact în folder root
+
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'SelfServiceWebApp'
           slot-name: 'Production'
-          package: node-app/TestAppRent
+          package: package
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5481EC2B482E410984800BF28052CE0E }}
